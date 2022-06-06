@@ -1,0 +1,89 @@
+<!-- je charge mon partial "header" -->
+<%- include('partials/header') %>
+
+<div class="row">
+
+  <div class="col-lg-3">
+    <!-- je charge mon partial "leftMenu" -->
+    <%- include('partials/leftMenu') %>
+  </div>
+  <!-- /.col-lg-3 -->
+
+  <article class="col-lg-9" itemscope itemtype="http://schema.org/Product">
+
+    <div class="row">
+      <div class="col-lg-6">
+        <img itemprop="image" src="/images/<%=figurine.name.toLowerCase()%>.png"
+          alt="Photo de la figurine <%=figurine.name %> tirée du jeu Final Fantasy">
+      </div>
+
+      <div class="col-lg-6">
+        <div class="card">
+          <div class="card-body">
+            <h3 itemprop="name" class="card-title">
+              <%= figurine.name %>
+            </h3>
+            <div itemprop="category" class="badge badge-pill badge-<%=figurine.category.toLowerCase()%>">
+              <%= figurine.category %>
+            </div>
+            <p class="card-text">Taille réelle : <%= figurine.size %>cm</p>
+            <p itemprop="description" class="card-text">
+              <%= figurine.description %>
+            </p>
+            <p itemprop="aggregateRating" class="card-text">
+              Note moyenne : &#9733; &#9733; &#9733; &#9733; &#9734;
+              <br>
+              <a href="#" data-toggle="modal" data-target="#reviewsModal">Détails des avis</a>
+            </p>
+            <div class="h5">$<%= figurine.price %></div>
+            <p class="card-text">
+              <a href="/bookmarks/add/<%=figurine.id%>" class="link-add-bookmarks">Ajouter aux favoris</a>
+            </p>
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+    <!-- /.row -->
+
+  </article>
+  <!-- /.col-lg-9 -->
+
+</div>
+<!-- /.row -->
+
+<!-- Modale des avis -->
+<div class="modal fade" id="reviewsModal" tabindex="-1" role="dialog" aria-labelledby="reviewsModalLabel"
+  aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h3 class="modal-title" id="reviewsModalLabel">Avis des internautes</h3>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <% reviews.forEach(review => { %>
+        <section>
+          <h5>
+            <%= review.title %>&nbsp;
+            <small class="text-muted">
+              <!-- je dois un tiret et pas un égal car c'est du HTML -->
+              <%- review.note %>
+            </small>
+          </h5>
+          <p class="review-author">Par <%= review.author %></p>
+          <p><%= review.message %></p>
+        </section>
+        <hr>
+        <% }) %>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<!-- je charge mon partial "footer" -->
+<%- include('partials/footer') %>

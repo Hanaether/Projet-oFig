@@ -1,0 +1,61 @@
+<!-- je charge mon partial "header" -->
+<%- include('partials/header') %>
+
+    <div class="row">
+
+      <div class="col-lg-3">
+        <%- include('partials/leftMenu') %>
+      </div>
+      <!-- /.col-lg-3 -->
+
+      <div class="col-lg-9">
+        <div class="row">
+
+          <% for (const figurine of figurines) { %>
+            <!-- un div c'est pas assez précis. c'est bien un ARTICLE -->
+            <!-- je repere l'élément qui contient ma donnée -->
+            <!-- et je lui donne les attributs de microdonnée -->
+            <article itemscope itemtype="http://schema.org/Product" class="col-lg-4 col-md-6 mb-4">
+              <div class="card h-100">
+                <a itemprop="url" href="/article/<%= figurine.id %>">
+                  <img
+                    itemprop="image"
+                    class="card-img-top"
+                    src="./images/<%=figurine.name.toLowerCase()%>.png"
+                    alt="Photo de la figurine <%=figurine.name %> tirée du jeu Final Fantasy"
+                  >
+                  <div itemprop="category" class="badge-category badge badge-pill badge-<%=figurine.category.toLowerCase()%>">
+                    <%= figurine.category %>
+                  </div>
+                </a>
+                <div class="card-body">
+                  <h2 itemprop="name" class="h4 card-title">
+                    <a href="/article/<%= figurine.id %>">
+                      <%= figurine.name %>
+                    </a>
+                  </h2>
+                  <!-- le signe Dollar n'est pas en BDD. je le laisse devant. -->
+                  <!-- le prix, n'est certainement pas un titre -->
+                  <div class="h5">$<%= figurine.price %></div>
+                  <p itemprop="description" class="card-text">
+                    <%= figurine.description %>
+                  </p>
+                </div>
+                <div class="card-footer">
+                  <span class="small text-muted" itemprop="aggregateRating"><%- figurine.avg %></span>
+                  <a href="/bookmarks/add/<%=figurine.id%>" class="link-add-bookmarks">Ajouter aux favoris</a>
+                </div>
+              </div>
+            </article>
+          <% } %>
+        </div>
+        <!-- /.row -->
+
+      </div>
+      <!-- /.col-lg-9 -->
+
+    </div>
+    <!-- /.row -->
+
+<!-- je charge mon partial "footer" -->
+<%- include('partials/footer') %>

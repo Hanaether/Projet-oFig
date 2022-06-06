@@ -1,0 +1,13 @@
+<h1 class="my-4">O'Fig</h1>
+
+<h2 class="h5">Catégories</h2>
+<ul class="list-group">
+    <% for (const category of categories) { %>
+        <li class="list-group-item d-flex justify-content-between align-items-center">
+            <a href="#">
+                <%= category.category %>
+            <span class="badge badge-primary badge-pill"><%= category.count %></span>
+            </a>
+        </li>
+    <% } %>
+</ul>
